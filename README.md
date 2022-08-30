@@ -23,7 +23,12 @@ arch -x86_64 pod install
 pod install
 ```
 
-Step 3: Open **SwiftUI-WeatherApp.xcworkspace**
+Step 3: Add OpenWeatherMap API url and OpenWeatherMap App key in class **StringConstants.swift**
+
+let apiBaseUrl = ""
+let appKey = ""
+
+Step 4: Open **SwiftUI-WeatherApp.xcworkspace**
 
 ## Technology Stack
 
