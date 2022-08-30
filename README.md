@@ -14,7 +14,8 @@ Step 1: Open Terminal and go to up to project path
 
 Step 2: Type below command in terminal
 
-For M1 or M2 Silicon chip
+**For M1 or M2 Silicon chip
+**
 ```
 arch -x86_64 pod install
 ```
