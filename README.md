@@ -7,6 +7,7 @@ Hello there, I'm Saumil Shah and in this repository, I'll be posting the code fo
 I hope you'll learn something new and use these and concepts to achieve great animation effects and more for your apps.
 
 ## iOS App
+![Weather](https://user-images.githubusercontent.com/56787966/187666416-14541bd2-8fd3-4ed1-85e5-7abfbcf51e13.GIF)
 
 ## How to Run Project? 
 
