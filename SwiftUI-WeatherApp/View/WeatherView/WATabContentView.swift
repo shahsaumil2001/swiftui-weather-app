@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WATabContentView: View {
 
+    // MARK: - variables
     var city: String
     var cityDetail: City
     var cityForecast: [Forecast]

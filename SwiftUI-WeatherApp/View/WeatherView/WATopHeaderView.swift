@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WATopHeaderView: View {
 
+    // MARK: - variables
     var city: String
     var todayForecast: Forecast
 

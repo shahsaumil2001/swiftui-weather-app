@@ -20,6 +20,10 @@ enum DateFormat: String {
 
 extension Date {
 
+    ///
+    /// The func is `convertToForecastDate` will convert date to expected date format
+    ///  extension Date's `convertToForecastDate` method
+    ///
     func convertToForecastDate(dateInStr: String, expecxtedDateFormat: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormat.localLongDate.rawValue
@@ -32,24 +36,40 @@ extension Date {
         return ""
     }
 
+    ///
+    /// The func is `hour` returns hour of date
+    ///  extension Date's `hour` method
+    ///
     func hour() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h a"
         return dateFormatter.string(from: self)
     }
 
+    ///
+    /// The func is `dayMonthAndYear` returns day & month of date
+    ///  extension Date's `dayMonthAndYear` method
+    ///
     func dayMonthAndYear() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter.string(from: self)
     }
 
+    ///
+    /// The func is `dayMonthly` returns date in 'dd MMM' format
+    ///  extension Date's `dayMonthly` method
+    ///
     func dayMonthly() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM"
         return dateFormatter.string(from: self)
     }
 
+    ///
+    /// The func is `currentTime` returns date in 'h mm a' format
+    ///  extension Date's `currentTime` method
+    ///
     func currentTime() -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "h mm a"

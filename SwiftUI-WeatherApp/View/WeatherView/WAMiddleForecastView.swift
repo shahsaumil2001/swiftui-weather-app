@@ -9,7 +9,27 @@ import SwiftUI
 
 struct WAMiddleForecastView: View {
 
+    // MARK: - variables
     var cityForecast: [Forecast]
+
+    // MARK: - functions
+    ///
+    /// The func is `fetchView` returns Seperator between cell in Forecast
+    ///  A WAMiddleForecastView's `fetchView` method
+    ///
+    @ViewBuilder
+    func fetchView(dataObject: Forecast) -> some View {
+
+        // Returns seperator for all index accept last index
+
+        if dataObject != cityForecast.last {
+            Rectangle().frame(height: CGFloat(1))
+                .foregroundColor(.white.opacity(0.3))
+                .padding([.leading, .trailing], 16)
+        } else {
+            Spacer(minLength: 10)
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -67,23 +87,5 @@ struct WAMiddleForecastView: View {
         }
         .padding([.leading, .trailing], 8)
         .padding(.top, 10)
-    }
-
-    ///
-    /// The func is `fetchView` returns Seperator between cell in Forecast
-    ///  A WAMiddleForecastView's `fetchView` method
-    ///
-       @ViewBuilder
-    func fetchView(dataObject: Forecast) -> some View {
-
-        // Returns seperator for all index accept last index
-
-        if dataObject != cityForecast.last {
-            Rectangle().frame(height: CGFloat(1))
-                .foregroundColor(.white.opacity(0.3))
-                .padding([.leading, .trailing], 16)
-        } else {
-            Spacer(minLength: 10)
-        }
     }
 }

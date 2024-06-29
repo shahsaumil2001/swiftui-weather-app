@@ -9,9 +9,11 @@ import SwiftUI
 
 struct WASunProgressView: View {
 
+    // MARK: - variables
     var cityDetail: City
     @State var progress: CGFloat = 0.0
 
+    // MARK: - functions
     ///
     /// The func is `startLoading` initiates progress for Sunrise-Sunset Progressbar
     ///  A WASunDetailView's `startLoading` method
@@ -33,11 +35,11 @@ struct WASunProgressView: View {
     ///
     func giveTimeProgress() -> CGFloat {
         let currentTime = Date().hour()
-        if currentTime < "12 AM" {
+        if currentTime < KeyConstants().twelveAM {
             return 0.25
-        } else if currentTime ==  "12 PM" {
+        } else if currentTime == KeyConstants().twelvePM {
             return 0.50
-        } else if currentTime > "12 PM" && currentTime < "5 PM" {
+        } else if currentTime > KeyConstants().twelvePM && currentTime < KeyConstants().fivePM {
             return 0.75
         } else {
             return 0.99

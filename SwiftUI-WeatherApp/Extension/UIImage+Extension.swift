@@ -24,6 +24,10 @@ private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 extension UIImage {
 
+    ///
+    /// The func is `gifImageWithData` returns Image from Data
+    ///  extension UIImage's `gifImageWithData` method
+    ///
     public class func gifImageWithData(_ data: Data) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             print("image doesn't exist")
@@ -33,6 +37,10 @@ extension UIImage {
         return UIImage.animatedImageWithSource(source)
     }
 
+    ///
+    /// The func is `gifImageWithURL` returns Image from URL
+    ///  extension UIImage's `gifImageWithURL` method
+    ///
     public class func gifImageWithURL(_ gifUrl: String) -> UIImage? {
         guard let bundleURL: URL = URL(string: gifUrl)
             else {
@@ -47,6 +55,10 @@ extension UIImage {
         return gifImageWithData(imageData)
     }
 
+    ///
+    /// The func is `gifImageWithName` returns Image from String
+    ///  extension UIImage's `gifImageWithName` method
+    ///
     public class func gifImageWithName(_ name: String) -> UIImage? {
         guard let bundleURL = Bundle.main
             .url(forResource: name, withExtension: "gif") else {
@@ -61,6 +73,10 @@ extension UIImage {
         return gifImageWithData(imageData)
     }
 
+    ///
+    /// The func is `delayForImageAtIndex` returns delay for Image
+    ///  extension UIImage's `delayForImageAtIndex` method
+    ///
     class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
 
@@ -88,6 +104,10 @@ extension UIImage {
         return delay
     }
 
+    ///
+    /// The func is `gcdForPair` returns gcd for points
+    ///  extension UIImage's `gcdForPair` method
+    ///
     class func gcdForPair(_ aPoint: Int?, _ bPoint: Int?) -> Int {
         var aPoint = aPoint
         var bPoint = bPoint
@@ -120,6 +140,10 @@ extension UIImage {
         }
     }
 
+    ///
+    /// The func is `gcdForArray` returns gcd for array
+    ///  extension UIImage's `gcdForArray` method
+    ///
     class func gcdForArray(_ array: [Int]) -> Int {
         if array.isEmpty {
             return 1
@@ -134,6 +158,10 @@ extension UIImage {
         return gcd
     }
 
+    ///
+    /// The func is `animatedImageWithSource` returns animated image
+    ///  extension UIImage's `animatedImageWithSource` method
+    ///
     class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()

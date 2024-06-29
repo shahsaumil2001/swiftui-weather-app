@@ -24,6 +24,7 @@ class WeatherViewModel: ObservableObject {
     @Published var stateView: StateView = StateView.loading
     @Published var selectedForecastDescription = ""
 
+    // MARK: - Functions
     ///
     /// The func is `createAPIUrl` returns API URL
     ///  A WeatherViewModel's `createAPIUrl` method
@@ -99,13 +100,13 @@ class WeatherViewModel: ObservableObject {
                     // handle error here
                     self.apiResponse.message = error.localizedDescription
                     self.stateView = .failed
-                    print("Failed to load: \(error.localizedDescription)")
+                    debugPrint("Failed to load: \(error.localizedDescription)")
                 }
             case .failure(let error):
                 // handle error here
                 self.apiResponse.message = error.localizedDescription
                 self.stateView = .failed
-                print("Failed to load: \(error.localizedDescription)")
+                debugPrint("Failed to load: \(error.localizedDescription)")
             }
         })
     }

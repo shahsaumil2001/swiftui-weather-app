@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WAHumidityView: View {
 
+    // MARK: - variables
     var todayForecast: Forecast
 
     var body: some View {

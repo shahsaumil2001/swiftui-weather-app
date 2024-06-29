@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WALoadingView: View {
 
+    // MARK: - variables
     @ObservedObject var viewModel = WeatherViewModel()
 
     var body: some View {

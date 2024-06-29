@@ -10,17 +10,10 @@ import SDWebImageSwiftUI
 
 struct WABackgroundView: View {
 
+    // MARK: - variables
     @Binding var viewModel: WeatherViewModel
 
-    var body: some View {
-        let url = Bundle.main.url(forResource: self.getBackgroundForForecast(), withExtension: KeyConstants().gifExtension)!
-        let data = (try? Data(contentsOf: url)) ?? Data()
-        // GIF
-        AnimatedImage(data: data)
-            .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-            .edgesIgnoringSafeArea(.all)
-    }
-
+    // MARK: - functions
     ///
     /// The func is `getBackgroundForForecast` returns GIF as per description
     ///  A WABackgroundView's `getBackgroundForForecast` method
@@ -36,5 +29,14 @@ struct WABackgroundView: View {
         default:
             return GIF.nightSky
         }
+    }
+
+    var body: some View {
+        let url = Bundle.main.url(forResource: self.getBackgroundForForecast(), withExtension: KeyConstants().gifExtension)!
+        let data = (try? Data(contentsOf: url)) ?? Data()
+        // GIF
+        AnimatedImage(data: data)
+            .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+            .edgesIgnoringSafeArea(.all)
     }
 }

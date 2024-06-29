@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WAForecastCell: View {
 
+    // MARK: - variables
     var dataObject: Forecast
 
     var body: some View {

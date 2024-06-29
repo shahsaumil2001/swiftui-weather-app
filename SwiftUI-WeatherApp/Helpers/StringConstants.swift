@@ -17,6 +17,9 @@ struct KeyConstants {
     let celsius = "°C"
     let percentage = " %"
     let gifExtension = "gif"
+    let twelveAM = "12 AM"
+    let twelvePM = "12 PM"
+    let fivePM = "5 PM"
 }
 
 struct APIKey {
@@ -53,7 +56,6 @@ struct GIF {
     static let cloudSky = "CloudSky"
     static let nightSky = "NightSky"
 }
-
 
 struct StringConstant {
     static let noInternetConnection = "The Internet connection appears to be offline."
