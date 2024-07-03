@@ -8,7 +8,8 @@
 import SwiftUI
 import SwiftyJSON
 
-struct Forecast: Identifiable, Equatable {
+struct Forecast: Decodable, Identifiable, Equatable {
+
     var id: Double
     var date: String
     var time: Int

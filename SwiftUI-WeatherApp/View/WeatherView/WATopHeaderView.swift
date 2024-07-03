@@ -10,19 +10,19 @@ import SwiftUI
 struct WATopHeaderView: View {
 
     // MARK: - variables
-    var city: String
+    var cityName: String
     var todayForecast: Forecast
 
     var body: some View {
         VStack {
             // City name
-            Text(city)
+            Text(cityName)
                 .font(.largeTitle)
                 .fontWeight(.medium)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
 
-            // Temperature
+            // Temperature : 28°C
             Text("\(Int(todayForecast.temperature))\(KeyConstants().celsius)")
                 .font(.system(size: 86))
                 .fontWeight(.thin)

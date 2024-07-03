@@ -13,13 +13,13 @@ class WeatherViewModel: ObservableObject {
 
     // MARK: - Properties
     // Local variables
-    var apiResponse = City(json: JSON())
-    var mainArray = [City]()
+    var city: City = .preview
+    var cities = [City]()
     // Published array
-    @Published var cityNameList = [String]()
-    @Published var todayForacast = [Forecast]()
-    @Published var cityForecastList = [Forecast]()
-    @Published var weatherDescriptionList = [String]()
+    @Published var cityNames = [String]()
+    @Published var todayForacasts = [Forecast]()
+    @Published var cityForecasts = [Forecast]()
+    @Published var weatherDescriptions = [String]()
     // Published variable
     @Published var stateView: StateView = StateView.loading
     @Published var selectedForecastDescription = ""
@@ -38,20 +38,19 @@ class WeatherViewModel: ObservableObject {
     ///  A WeatherViewModel's `createTodayForecastList` method
     ///
     func createTodayForecastList() {
-        self.todayForacast.removeAll()
-        for index in 0..<self.mainArray.count where self.mainArray.count > 0 {
-            let dataObject = self.mainArray[index]
-
+        self.todayForacasts.removeAll()
+        for index in 0..<self.cities.count where self.cities.count > 0 {
+            let dataObject = self.cities[index]
             for weatherIndex in 0..<dataObject.list.count where weatherIndex % 40 == 0 {
-                self.todayForacast.append(dataObject.list[weatherIndex])
-                self.weatherDescriptionList.append(dataObject.list[weatherIndex].mainDescription)
+                self.todayForacasts.append(dataObject.list[weatherIndex])
+                self.weatherDescriptions.append(dataObject.list[weatherIndex].mainDescription)
             }
         }
     }
 
     // MARK: - API
     ///
-    /// The func is `getWeatherInformation` is used to Call 
+    /// The func is `getWeatherInformation` is used to Call
     ///  A WeatherViewModel's `getWeatherInformation` method
     ///
     func getWeatherInformation(lat: String, long: String) {
@@ -65,46 +64,42 @@ class WeatherViewModel: ObservableObject {
             case .success(let data):
                 do {
                     guard let data = data else {
-                        self.apiResponse.message = StringConstant.somethingWentWrong
+                        self.city.message = StringConstant.somethingWentWrong
                         self.stateView = .failed
                         return
                     }
-                    // make sure this JSON is in the format we expect
-                    if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                        let jsonObject = JSON(json)
-                        self.apiResponse = City(json: jsonObject)
-                        self.mainArray.append(self.apiResponse)
-
-                        self.cityNameList.removeAll()
-                        self.cityForecastList.removeAll()
-                        for data in self.mainArray where self.mainArray.count > 0 {
-                            // Fill cityNameList
-                            self.cityNameList.append(data.cityName)
-
-                            // Fill cityForecastList
-                            self.cityForecastList.append(contentsOf: data.list)
-                        }
-
-                        // Fill todayForecastList
-                        self.createTodayForecastList()
-
-                        // Status code will be 200 then show data
-                        if Int(self.apiResponse.code) == 200 {
-                            self.stateView = .success
-                        } else {
-                            // Status code other than 200 then show error
-                            self.stateView = .failed
-                        }
+                    // decode JSON
+                    self.city = try JSONDecoder().decode(City.self, from: data)
+                    self.cities.append(self.city)
+                    self.cityNames.removeAll()
+                    self.cityForecasts.removeAll()
+                    for data in self.cities where self.cities.count > 0 {
+                        // Fill cityNames
+                        self.cityNames.append(data.cityName)
+                        // Fill cityForecastList
+                        self.cityForecasts.append(contentsOf: data.list)
                     }
+
+                    // Fill todayForecastList
+                    self.createTodayForecastList()
+
+                    // Status code will be 200 then show data
+                    if Int(self.city.code) == 200 {
+                        self.stateView = .success
+                    } else {
+                        // Status code other than 200 then show error
+                        self.stateView = .failed
+                    }
+
                 } catch let error as NSError {
                     // handle error here
-                    self.apiResponse.message = error.localizedDescription
+                    self.city.message = error.localizedDescription
                     self.stateView = .failed
                     debugPrint("Failed to load: \(error.localizedDescription)")
                 }
             case .failure(let error):
                 // handle error here
-                self.apiResponse.message = error.localizedDescription
+                self.city.message = error.isSessionTaskError ? StringConstant.weatherKeyMissing : error.localizedDescription
                 self.stateView = .failed
                 debugPrint("Failed to load: \(error.localizedDescription)")
             }

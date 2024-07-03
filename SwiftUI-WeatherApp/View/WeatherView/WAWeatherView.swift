@@ -18,28 +18,26 @@ struct WAWeatherView: View {
     ///  A WAWeatherView's `getCityForecast` method
     ///
     func getCityForecast(index: Int) -> [Forecast] {
-        var tempArr = [Forecast]()
-
+        var temperatures = [Forecast]()
         // For first index append object in Array
         if index == 0 {
-            for indexVal in 0..<self.viewModel.cityForecastList.count {
+            for indexVal in 0..<self.viewModel.cityForecasts.count {
                 while indexVal < 40 {
-                    tempArr.append(self.viewModel.cityForecastList[indexVal])
+                    temperatures.append(self.viewModel.cityForecasts[indexVal])
                     break
                 }
             }
         } else {
             let previousIndex = 40 * index, nextIndex = 40 * (index + 1)
-
             // Append objects in 40 slots like 1...40, 41...80, 81...120
-            for indexVal in previousIndex..<self.viewModel.cityForecastList.count {
+            for indexVal in previousIndex..<self.viewModel.cityForecasts.count {
                 while indexVal <= nextIndex {
-                    tempArr.append(self.viewModel.cityForecastList[indexVal])
+                    temperatures.append(self.viewModel.cityForecasts[indexVal])
                     break
                 }
             }
         }
-        return tempArr
+        return temperatures
     }
 
     var body: some View {
@@ -47,20 +45,18 @@ struct WAWeatherView: View {
             LazyVStack {
                 // Pagination
                 TabView {
-                    ForEach(0..<self.viewModel.cityNameList.count, id: \.self) { index in
-
+                    ForEach(0..<self.viewModel.cityNames.count, id: \.self) { index in
                         // ScrollView
                         ScrollView(showsIndicators: false) {
                             ZStack {
                                 Color.clear
-
                                 // TabContent View
-                                WATabContentView(city: self.viewModel.cityNameList[index], cityDetail: self.viewModel.mainArray[index],
-                                                 cityForecast: getCityForecast(index: index), todayForecast: self.viewModel.todayForacast[index])
-                                    .onAppear {
-                                        // Set current index's description in ViewModel
-                                        self.viewModel.selectedForecastDescription =  self.viewModel.todayForacast[index].mainDescription
-                                    }
+                                WATabContentView(city: self.viewModel.cities[index],
+                                                 cityForecasts: getCityForecast(index: index), todayForecast: self.viewModel.todayForacasts[index])
+                                .onAppear {
+                                    // Set current index's description in ViewModel
+                                    self.viewModel.selectedForecastDescription =  self.viewModel.todayForacasts[index].mainDescription
+                                }
                             }
                         }
                     } .padding(.all, 10)

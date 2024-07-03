@@ -22,7 +22,6 @@ struct WAHumidityView: View {
                 .blur(radius: 2)
                 .padding([.leading, .trailing], 10)
             HStack {
-
                 // Humidity Icon
                 Image(systemName: Images.humidity)
                     .renderingMode(.template)
@@ -36,7 +35,6 @@ struct WAHumidityView: View {
                     .fontWeight(.medium)
                     .padding(.leading, 15)
                     .shadow(radius: 5)
-
             }
             .padding([.leading, .trailing], 26)
             .padding([.top, .bottom])

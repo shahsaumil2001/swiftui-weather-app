@@ -10,7 +10,7 @@ import SwiftUI
 struct WAMiddleForecastView: View {
 
     // MARK: - variables
-    var cityForecast: [Forecast]
+    var cityForecasts: [Forecast]
 
     // MARK: - functions
     ///
@@ -21,8 +21,7 @@ struct WAMiddleForecastView: View {
     func fetchView(dataObject: Forecast) -> some View {
 
         // Returns seperator for all index accept last index
-
-        if dataObject != cityForecast.last {
+        if dataObject != cityForecasts.last {
             Rectangle().frame(height: CGFloat(1))
                 .foregroundColor(.white.opacity(0.3))
                 .padding([.leading, .trailing], 16)
@@ -33,7 +32,6 @@ struct WAMiddleForecastView: View {
 
     var body: some View {
         ZStack {
-
             // Background blur Rectangle View
             Rectangle()
                 .foregroundColor(.black.opacity(0.3))
@@ -43,7 +41,6 @@ struct WAMiddleForecastView: View {
 
             VStack(alignment: .leading) {
                 HStack {
-
                     // Header Icon
                     Image(systemName: Images.calendar)
                         .renderingMode(.template)
@@ -57,7 +54,6 @@ struct WAMiddleForecastView: View {
                         .fontWeight(.medium)
                         .padding(.leading, 15)
                         .shadow(radius: 5)
-
                 }
                 .padding([.leading, .trailing], 26)
                 .padding(.bottom, 4)
@@ -71,11 +67,11 @@ struct WAMiddleForecastView: View {
                 // Scroll View
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        ForEach(cityForecast) { dataObject in
+                        ForEach(cityForecasts) { dataObject in
                             Spacer().frame(width: 8)
 
                             // Forecast Cell
-                            WAForecastCell(dataObject: dataObject)
+                            WAForecastCell(forecast: dataObject)
 
                             // Seperator between cell in Forecast
                             fetchView(dataObject: dataObject)

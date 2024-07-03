@@ -10,7 +10,7 @@ import SwiftUI
 struct WASunProgressView: View {
 
     // MARK: - variables
-    var cityDetail: City
+    var city: City
     @State var progress: CGFloat = 0.0
 
     // MARK: - functions
@@ -19,14 +19,14 @@ struct WASunProgressView: View {
     ///  A WASunDetailView's `startLoading` method
     ///
     func startLoading() {
-           _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-               withAnimation {
-                   self.progress += 0.01
-                   if self.progress >= self.giveTimeProgress() {
-                       timer.invalidate()
-                   }
-               }
-           }
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            withAnimation {
+                self.progress += 0.01
+                if self.progress >= self.giveTimeProgress() {
+                    timer.invalidate()
+                }
+            }
+        }
     }
 
     ///
@@ -58,7 +58,6 @@ struct WASunProgressView: View {
 
             VStack(alignment: .leading) {
                 HStack {
-
                     // Header Icon
                     Image(systemName: Images.sun)
                         .renderingMode(.template)
@@ -72,7 +71,6 @@ struct WASunProgressView: View {
                         .fontWeight(.medium)
                         .padding(.leading, 15)
                         .shadow(radius: 5)
-
                 }
                 .padding([.leading, .trailing], 26)
                 .padding(.bottom, 4)
@@ -89,7 +87,6 @@ struct WASunProgressView: View {
                     .padding([.leading, .trailing], 16)
                     .overlay {
                         ZStack {
-
                             // Dotted Half Circle
                             Circle()
                                 .trim(from: 0.0, to: 0.5)
@@ -108,14 +105,12 @@ struct WASunProgressView: View {
                         }
                         HStack {
                             Spacer()
-
                             // Sunrise yellow dot above time
                             Circle()
                                 .frame(width: 10, height: 10, alignment: .leading)
                                 .foregroundColor(.yellow)
                                 .shadow(radius: 5)
                             Spacer(minLength: 188)
-
                             // Sunset yellow dot above time
                             Circle()
                                 .frame(width: 10, height: 10, alignment: .trailing)
@@ -124,19 +119,17 @@ struct WASunProgressView: View {
                             Spacer()
                         }
                     }
-
                 HStack {
                     Spacer()
-
                     // Sunrise time
-                    Text(cityDetail.sunrise.dateFromMilliseconds().hour())
+                    Text(city.sunrise.dateFromMilliseconds().hour())
                         .foregroundColor(.white)
                         .font(.system(size: 18, weight: .semibold))
                         .shadow(radius: 5)
                     Spacer(minLength: 130)
 
                     // Sunset time
-                    Text(cityDetail.sunset.dateFromMilliseconds().hour())
+                    Text(city.sunset.dateFromMilliseconds().hour())
                         .padding(.leading)
                         .foregroundColor(.white)
                         .font(.system(size: 18, weight: .semibold))

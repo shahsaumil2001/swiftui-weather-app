@@ -35,17 +35,37 @@ struct WALoadingView: View {
                     // No Internet
                     Text(StringConstant.noInternetConnection)
                         .foregroundColor(.white)
-                        .font(.system(size: 25, weight: .bold))
+                        .font(.system(size: 20, weight: .regular))
                         .shadow(radius: 5)
                         .frame(width: 300, alignment: .center)
                 }
 
                 if viewModel.stateView == .failed {
                     // API Error Message
-                    Text(viewModel.apiResponse.message)
-                        .foregroundColor(.white)
-                        .font(.system(size: 20, weight: .bold))
-                        .shadow(radius: 5)
+                    VStack(alignment: .center, spacing: 5) {
+                        // Error Image
+                        Image(systemName: Images.error)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                            .frame(width: 50, height: 50, alignment: .center)
+                            .padding(.bottom, 10)
+
+                        // Error Title
+                        Text(StringConstant.error)
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .regular))
+                            .shadow(radius: 5)
+                            .multilineTextAlignment(.center)
+
+                        // Error Description
+                        Text(viewModel.city.message)
+                            .foregroundColor(.white.opacity(0.7))
+                            .font(.system(size: 18, weight: .regular))
+                            .shadow(radius: 5)
+                            .multilineTextAlignment(.center)
+
+                    }.padding(.horizontal, 20)
                 }
             }
         }.onAppear {

@@ -49,6 +49,7 @@ struct Images {
     static let humidity = "humidity.fill"
     static let calendar = "calendar"
     static let sun = "sun.max.fill"
+    static let error = "exclamationmark.triangle"
 }
 
 struct GIF {
@@ -68,6 +69,8 @@ struct StringConstant {
     static let humidity = "Humidity   "
     static let high = "H:"
     static let low = "L:"
+    static let weatherKeyMissing = "Please add API URL and weather Key to view weather forecast."
+    static let error = "Error!"
 }
 
 enum Description: String {
